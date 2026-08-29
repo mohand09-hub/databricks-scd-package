@@ -1,20 +1,20 @@
 # ============================================================================
 # Orders Transformation Configuration
 # ============================================================================
-# This YAML defines the notebook path, DDL files, and parameters
+# This YAML defines the transformation module path, DDL files, and parameters
 # that a Databricks Job uses to run the orders transformation.
 # ============================================================================
 
-notebook:
-  path: /Workspace/Users/mrdmohu@gmail.com/Metadata_Driven_Transformation_Framework/notebooks/orders_transformation
+transformation:
+  path: /Workspace/Users/mrdmohu@gmail.com/databricks-scd-package/transformations/orders_transformation.py
   task_key: orders_transformation
 
-  # DDL files (run by the notebook before transformation).
+  # DDL files (run before transformation).
   ddl:
     metadata_ddl: /Workspace/Users/mrdmohu@gmail.com/Metadata_Driven_Transformation_Framework/ddl/metadata_ddl/create_metadata_table.sql
-    asset_ddl: /Workspace/Users/mrdmohu@gmail.com/Metadata_Driven_Transformation_Framework/ddl/asset_ddl/orders.ddl
+    asset_ddl: /Workspace/Users/mrdmohu@gmail.com/databricks-scd-package/ddl/asset_ddl/orders.ddl
 
-  # Parameters passed to the notebook at runtime.
+  # Parameters passed at runtime.
   # These match the metadata entry in dev_customer.metadata.ingestion_config.
   base_parameters:
     catalog: dev_customer
