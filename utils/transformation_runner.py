@@ -16,7 +16,7 @@ Usage (from a Databricks notebook or job)::
     runner = TransformationRunner(
         spark,
         "dev_customer.metadata.ingestion_config",
-        audit_table="dev_customer.base.audit_log",
+        audit_table="dev_customer.audit_log.audit_log",
     )
     runner.run_load_group("TPCH_TRANSFORMATIONS")
 """
