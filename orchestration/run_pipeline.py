@@ -24,7 +24,7 @@
 # MAGIC | Parameter | Default | Description |
 # MAGIC | --- | --- | --- |
 # MAGIC | `base_schema` | `base` | Schema for audit log table |
-# MAGIC | `audit_ddl_path` | `.../ddl/asset_ddl/audit_log.ddl` | DDL for audit log table |
+# MAGIC | `audit_ddl_path` | `.../ddl/audit_ddl/audit_log.ddl` | DDL for audit log table |
 # MAGIC
 # MAGIC **Asset Module Parameters:**
 # MAGIC | Parameter | Default | Description |
@@ -47,7 +47,7 @@
 # ---------------------------------------------------------------------------
 import sys
 
-_BASE = "/Workspace/Users/mrdmohu@gmail.com/Metadata_Driven_Transformation_Framework"
+_BASE = "/Workspace/Users/mrdmohu@gmail.com/databricks-scd-package"
 
 # --- Common Parameters ---
 dbutils.widgets.text("catalog", "dev_customer")
@@ -60,7 +60,7 @@ dbutils.widgets.text("csv_path", f"{_BASE}/ddl/metadata_ddl/ingestion_config.csv
 
 # --- Audit Module Parameters ---
 dbutils.widgets.text("base_schema", "base")
-dbutils.widgets.text("audit_ddl_path", f"{_BASE}/ddl/asset_ddl/audit_log.ddl")
+dbutils.widgets.text("audit_ddl_path", f"{_BASE}/ddl/audit_ddl/audit_log.ddl")
 
 # --- Asset Module Parameters ---
 dbutils.widgets.text("asset_ddl_path", f"{_BASE}/ddl/asset_ddl/orders.ddl")
