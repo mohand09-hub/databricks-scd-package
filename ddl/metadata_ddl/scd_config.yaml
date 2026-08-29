@@ -1,0 +1,58 @@
+# SCD Type 2 configuration for the ingestion_config metadata table.
+# This config drives the merge logic in scd_utils.py.
+# The SCD2 audit columns live in the metadata table DDL and are
+# managed automatically by the loader — you only adjust them here.
+
+scd2:
+  # Columns that uniquely identify a metadata record.
+  # If these match an existing current row, the loader checks
+  # whether any track_changes_columns have been modified.
+  business_key:
+    - load_group_name
+    - dataset_name
+
+  # Columns whose values trigger a new SCD2 version when they change.
+  # Business-key, SCD2 tracking, and audit fields are excluded.
+  track_changes_columns:
+    - application_name
+    - dataset_layer
+    - dataset_layer_desc
+    - dataset_desc
+    - dataset_load_sequence
+    - is_active
+    - has_custom
+    - source_load_type
+    - source_table_list
+    - backload_history_in_days
+    - target_load_type
+    - target_uc_catalog
+    - target_uc_schema
+    - target_uc_table
+    - target_primary_key_columns
+    - merge_key_columns
+    - partition_columns
+    - clustering_columns
+    - target_table_properties
+    - scd_columns
+    - transformation_path
+    - notification_email_id
+    - dataset_notification_flag
+    - reporting_frequency
+    - reporting_date
+
+  # SCD2 audit column names (must match the DDL).
+  valid_from_column:   effective_start_date
+  valid_to_column:     effective_end_date
+  active_flag_column:  is_current
+  version_column:      config_version
+
+  # Values written for active vs. expired rows.
+  active_flag_value:   true
+  inactive_flag_value: false
+
+  # Sentinel timestamp for the open-ended "valid_to" of current rows.
+  end_of_time: "9999-12-31 23:59:59"
+
+  # Catalog, schema, and table name are passed at runtime by the
+  # master_script.py — they replace {catalog} and {schema} placeholders
+  # in the DDL and are passed to SCDUtils as the target table name.

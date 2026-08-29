@@ -1,0 +1,38 @@
+# ============================================================================
+# Orders Transformation Configuration
+# ============================================================================
+# This YAML defines the notebook path, DDL files, and parameters
+# that a Databricks Job uses to run the orders transformation.
+# ============================================================================
+
+notebook:
+  path: /Workspace/Users/mrdmohu@gmail.com/Metadata_Driven_Transformation_Framework/notebooks/orders_transformation
+  task_key: orders_transformation
+
+  # DDL files (run by the notebook before transformation).
+  ddl:
+    metadata_ddl: /Workspace/Users/mrdmohu@gmail.com/Metadata_Driven_Transformation_Framework/ddl/metadata_ddl/create_metadata_table.sql
+    asset_ddl: /Workspace/Users/mrdmohu@gmail.com/Metadata_Driven_Transformation_Framework/ddl/asset_ddl/orders.ddl
+
+  # Parameters passed to the notebook at runtime.
+  # These match the metadata entry in dev_customer.metadata.ingestion_config.
+  base_parameters:
+    catalog: dev_customer
+    schema: metadata
+    source_table: samples.tpch.orders
+    target_catalog: dev_customer
+    target_schema: base
+    target_table: orders
+    load_type: OVERWRITE
+
+  # Job cluster configuration (smallest available).
+  job_cluster:
+    new_cluster:
+      spark_version: auto
+      num_workers: 1
+      node_type_id: i3.xlarge
+
+  # Schedule (uncomment to enable).
+  # schedule:
+  #   quartz_cron_expression: "0 0 8 * * ?"
+  #   timezone_id: UTC
